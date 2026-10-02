@@ -1,0 +1,32 @@
+Using device: cuda
+Loading true labels...
+Loading and filtering multi-omic features for 902 samples...
+Mapped Classes: {'CIN': 0, 'EBV': 1, 'GS': 2, 'MSI': 3}
+
+--- Starting Training ---
+Epoch 001/100 | Train Loss: 0.2798 | Train Acc: 26.77% | Val Acc: 15.56%
+Epoch 010/100 | Train Loss: 0.0665 | Train Acc: 69.49% | Val Acc: 64.44%
+Epoch 020/100 | Train Loss: 0.0252 | Train Acc: 85.85% | Val Acc: 76.67%
+Epoch 030/100 | Train Loss: 0.0165 | Train Acc: 89.60% | Val Acc: 67.78%
+Epoch 040/100 | Train Loss: 0.0193 | Train Acc: 87.93% | Val Acc: 77.78%
+Epoch 050/100 | Train Loss: 0.0258 | Train Acc: 86.55% | Val Acc: 71.11%
+Epoch 060/100 | Train Loss: 0.0038 | Train Acc: 97.50% | Val Acc: 85.56%
+Epoch 070/100 | Train Loss: 0.0014 | Train Acc: 98.89% | Val Acc: 87.78%
+Epoch 080/100 | Train Loss: 0.0002 | Train Acc: 100.00% | Val Acc: 86.67%
+Epoch 090/100 | Train Loss: 0.0001 | Train Acc: 100.00% | Val Acc: 86.67%
+Epoch 100/100 | Train Loss: 0.0001 | Train Acc: 100.00% | Val Acc: 87.78%
+
+--- Final Test Evaluation ---
+Test Accuracy: 86.81%
+Test Weighted F1-Score: 0.8562
+
+              precision    recall  f1-score   support
+
+         CIN       0.90      0.95      0.92        63
+         EBV       1.00      1.00      1.00         3
+          GS       0.67      0.36      0.47        11
+         MSI       0.80      0.86      0.83        14
+
+    accuracy                           0.87        91
+   macro avg       0.84      0.79      0.81        91
+weighted avg       0.86      0.87      0.86        91

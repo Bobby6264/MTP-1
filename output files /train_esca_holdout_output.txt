@@ -1,0 +1,34 @@
+Using device: cuda
+Loading true labels...
+Loading and filtering multi-omic features for 902 samples...
+Mapped Classes: {'CIN': 0, 'EBV': 1, 'GS': 2, 'MSI': 3}
+Found 844 training/val samples (COAD, READ, STAD)
+Found 58 holdout test samples (ESCA)
+
+--- Starting Training (Leave-One-Cancer-Out) ---
+Epoch 001/100 | Train Loss: 0.3062 | Train Acc: 22.92% | Val Acc: 3.53%
+Epoch 010/100 | Train Loss: 0.0912 | Train Acc: 72.07% | Val Acc: 42.35%
+Epoch 020/100 | Train Loss: 0.0513 | Train Acc: 74.70% | Val Acc: 76.47%
+Epoch 030/100 | Train Loss: 0.0134 | Train Acc: 91.17% | Val Acc: 89.41%
+Epoch 040/100 | Train Loss: 0.0371 | Train Acc: 88.67% | Val Acc: 69.41%
+Epoch 050/100 | Train Loss: 0.0089 | Train Acc: 95.26% | Val Acc: 75.29%
+Epoch 060/100 | Train Loss: 0.0011 | Train Acc: 99.47% | Val Acc: 84.71%
+Epoch 070/100 | Train Loss: 0.0002 | Train Acc: 100.00% | Val Acc: 87.06%
+Epoch 080/100 | Train Loss: 0.0001 | Train Acc: 100.00% | Val Acc: 87.06%
+Epoch 090/100 | Train Loss: 0.0001 | Train Acc: 100.00% | Val Acc: 84.71%
+Epoch 100/100 | Train Loss: 0.0001 | Train Acc: 100.00% | Val Acc: 85.88%
+
+--- Final ESCA Holdout Evaluation ---
+ESCA Test Accuracy: 94.83%
+ESCA Test Weighted F1-Score: 0.9498
+
+              precision    recall  f1-score   support
+
+         CIN       0.98      0.96      0.97        55
+          GS       0.00      0.00      0.00         1
+         MSI       0.67      1.00      0.80         2
+
+    accuracy                           0.95        58
+   macro avg       0.55      0.65      0.59        58
+weighted avg       0.95      0.95      0.95        58
+
