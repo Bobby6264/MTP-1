@@ -43,7 +43,7 @@ class MoXGATE(nn.Module):
         self.meth_enc = ModalityEncoder(meth_dim, embed_dim)
 
         self.gate_weights = nn.Parameter(torch.tensor([0.333, 0.333, 0.333]))
-        self.cross_attn = nn.MultiheadAttention(embed_dim=embed_dim, num_heads=8, batch_first=True)
+        self.cross_attn = nn.MultiheadAttention(embed_dim=embed_dim, num_heads=32, batch_first=True)
         self.norm_fusion = nn.LayerNorm(embed_dim)
 
         self.classifier = nn.Sequential(
@@ -145,7 +145,7 @@ def main():
     weights = weights / weights.sum() * len(class_counts)
     weights = weights.to(device)
     
-    criterion = FocalLoss(alpha=weights, gamma=2.0)
+    criterion = FocalLoss(alpha=None, gamma=2.0)
     optimizer = torch.optim.AdamW(model.parameters(), lr=1e-4, weight_decay=1e-2)
 
     best_val_acc = 0.0
@@ -161,6 +161,11 @@ def main():
             optimizer.zero_grad()
             out = model(g, m, me)
             loss = criterion(out, label)
+            
+            # Add λ₁‖w−1‖² regularizer (λ₁ = 0.01)
+            reg_loss = 0.01 * torch.sum((model.gate_weights - 1.0) ** 2)
+            loss = loss + reg_loss
+            
             loss.backward()
             optimizer.step()
 
@@ -183,13 +188,13 @@ def main():
 
         if val_acc > best_val_acc:
             best_val_acc = val_acc
-            torch.save(model.state_dict(), "moxgate_esca_weights.pth")
+            torch.save(model.state_dict(), "pth files/moxgate_esca_weights.pth")
 
         if epoch % 10 == 0 or epoch == 1:
             print(f"Epoch {epoch:03d}/{epochs} | Train Loss: {total_loss/total:.4f} | Train Acc: {train_acc*100:.2f}% | Val Acc: {val_acc*100:.2f}%")
 
     print("\n--- Final ESCA Holdout Evaluation ---")
-    model.load_state_dict(torch.load("moxgate_esca_weights.pth"))
+    model.load_state_dict(torch.load("pth files/moxgate_esca_weights.pth"))
     model.eval()
     all_preds, all_targets = [], []
     with torch.no_grad():

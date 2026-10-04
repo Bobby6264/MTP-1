@@ -1,0 +1,48 @@
+Using device: cuda
+Loading true labels...
+Loading and filtering multi-omic features for 902 samples...
+Mapped Classes: {'CIN': 0, 'EBV': 1, 'GS': 2, 'MSI': 3}
+Loading feature names...
+Successfully loaded pth files/moxgate_best_weights.pth
+
+Calculating Feature Attributions... (This may take a minute)
+
+==================================================
+TOP 10 MOST IMPORTANT BIOLOGICAL FEATURES
+==================================================
+
+--- Top Gene Expression Features ---
+CLDN3          : 0.003758
+SLC26A3        : 0.003537
+CDX1           : 0.003460
+HOXA10         : 0.002887
+NMNAT3         : 0.002610 
+MUC2           : 0.002600
+PRAP1          : 0.002538
+RPS20          : 0.002456
+HOXA11         : 0.002413
+FLJ32063       : 0.002410
+
+--- Top miRNA Features ---
+hsa-miR-375    : 1.633868
+hsa-miR-196b-5p: 1.109468
+hsa-miR-143-3p : 0.875847
+hsa-miR-1247-3p: 0.857902
+hsa-miR-191-5p : 0.846087
+hsa-miR-30a-5p : 0.809703
+hsa-miR-196a-5p: 0.773093
+hsa-let-7g-5p  : 0.747029
+hsa-miR-92a-3p : 0.693685
+hsa-miR-200a-5p: 0.668172
+
+--- Top Methylation Features ---
+cg09944147     : 0.006008
+cg11140785     : 0.005701
+cg05098471     : 0.005638
+cg23257840     : 0.005509
+cg19564877     : 0.005047
+cg20715764     : 0.004853
+cg07770222     : 0.004817
+cg10588377     : 0.004796
+cg21850254     : 0.004767
+cg13306164     : 0.004611

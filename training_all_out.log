@@ -1,0 +1,75 @@
+--- STARTING STANDARD TRAINING ---
+Using device: cuda
+Loading true labels...
+Loading and filtering multi-omic features for 902 samples...
+Mapped Classes: {'CIN': 0, 'EBV': 1, 'GS': 2, 'MSI': 3}
+
+--- Starting Training ---
+Epoch 001/100 | Train Loss: 0.5097 | Train Acc: 66.16% | Val Acc: 68.89%
+Epoch 010/100 | Train Loss: 0.2064 | Train Acc: 83.50% | Val Acc: 73.33%
+Epoch 020/100 | Train Loss: 0.0768 | Train Acc: 93.07% | Val Acc: 86.67%
+Epoch 030/100 | Train Loss: 0.0601 | Train Acc: 93.90% | Val Acc: 75.56%
+Epoch 040/100 | Train Loss: 0.0177 | Train Acc: 99.31% | Val Acc: 87.78%
+Epoch 050/100 | Train Loss: 0.0381 | Train Acc: 96.81% | Val Acc: 84.44%
+Epoch 060/100 | Train Loss: 0.0138 | Train Acc: 99.86% | Val Acc: 87.78%
+Epoch 070/100 | Train Loss: 0.0107 | Train Acc: 100.00% | Val Acc: 87.78%
+Epoch 080/100 | Train Loss: 0.0101 | Train Acc: 100.00% | Val Acc: 88.89%
+Epoch 090/100 | Train Loss: 0.0096 | Train Acc: 100.00% | Val Acc: 88.89%
+Epoch 100/100 | Train Loss: 0.0091 | Train Acc: 100.00% | Val Acc: 88.89%
+
+--- Final Test Evaluation ---
+Test Accuracy: 85.71%
+Test Weighted F1-Score: 0.8571
+
+              precision    recall  f1-score   support
+
+         CIN       0.92      0.92      0.92        63
+         EBV       1.00      0.67      0.80         3
+          GS       0.70      0.64      0.67        11
+         MSI       0.69      0.79      0.73        14
+
+    accuracy                           0.86        91
+   macro avg       0.83      0.75      0.78        91
+weighted avg       0.86      0.86      0.86        91
+
+--- STARTING ESCA HOLDOUT TRAINING ---
+Using device: cuda
+Loading true labels...
+Loading and filtering multi-omic features for 902 samples...
+Mapped Classes: {'CIN': 0, 'EBV': 1, 'GS': 2, 'MSI': 3}
+Found 844 training/val samples (COAD, READ, STAD)
+Found 58 holdout test samples (ESCA)
+
+--- Starting Training (Leave-One-Cancer-Out) ---
+Epoch 001/100 | Train Loss: 0.5203 | Train Acc: 65.35% | Val Acc: 67.06%
+Epoch 010/100 | Train Loss: 0.1593 | Train Acc: 85.64% | Val Acc: 85.88%
+Epoch 020/100 | Train Loss: 0.1786 | Train Acc: 85.24% | Val Acc: 87.06%
+Epoch 030/100 | Train Loss: 0.0859 | Train Acc: 89.59% | Val Acc: 81.18%
+Epoch 040/100 | Train Loss: 0.0268 | Train Acc: 98.02% | Val Acc: 88.24%
+Epoch 050/100 | Train Loss: 0.0187 | Train Acc: 99.47% | Val Acc: 84.71%
+Epoch 060/100 | Train Loss: 0.0118 | Train Acc: 100.00% | Val Acc: 87.06%
+Epoch 070/100 | Train Loss: 0.0110 | Train Acc: 100.00% | Val Acc: 87.06%
+Epoch 080/100 | Train Loss: 0.0104 | Train Acc: 100.00% | Val Acc: 89.41%
+Epoch 090/100 | Train Loss: 0.0098 | Train Acc: 100.00% | Val Acc: 87.06%
+Epoch 100/100 | Train Loss: 0.0093 | Train Acc: 100.00% | Val Acc: 90.59%
+
+--- Final ESCA Holdout Evaluation ---
+ESCA Test Accuracy: 96.55%
+ESCA Test Weighted F1-Score: 0.9586
+
+/home/du2/22CS30034/.local/lib/python3.13/site-packages/sklearn/metrics/_classification.py:1879: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/du2/22CS30034/.local/lib/python3.13/site-packages/sklearn/metrics/_classification.py:1879: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/home/du2/22CS30034/.local/lib/python3.13/site-packages/sklearn/metrics/_classification.py:1879: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+              precision    recall  f1-score   support
+
+         CIN       0.98      0.98      0.98        55
+          GS       0.00      0.00      0.00         1
+         MSI       0.67      1.00      0.80         2
+
+    accuracy                           0.97        58
+   macro avg       0.55      0.66      0.59        58
+weighted avg       0.95      0.97      0.96        58
+

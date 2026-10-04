@@ -1,0 +1,52 @@
+Using device: cuda
+Loading data...
+Loading true labels...
+Loading and filtering multi-omic features for 902 samples...
+Mapped Classes: {'CIN': 0, 'EBV': 1, 'GS': 2, 'MSI': 3}
+Found 844 training/val samples (COAD, READ, STAD)
+Found 58 holdout test samples (ESCA)
+
+Extracting the 58 unseen ESCA holdout samples for explanation...
+Successfully loaded pth files/moxgate_esca_weights.pth
+
+Calculating Feature Attributions on the ESCA holdout set...
+
+==================================================
+TOP 10 FEATURES USED FOR PREDICTING UNSEEN ESCA SAMPLES
+==================================================
+
+--- Top Gene Expression Features ---
+RHCG           : 0.004276
+GABRR1         : 0.003588
+LOC731789      : 0.003378
+TRIM54         : 0.003228
+SLC15A1        : 0.003177
+CXorf61        : 0.003165
+FAM83C         : 0.003064
+SLC7A9         : 0.002801
+GPR81          : 0.002774
+UPK1B          : 0.002739
+
+--- Top miRNA Features ---
+hsa-miR-375    : 1.360327
+hsa-miR-29a-3p : 1.050574
+hsa-miR-22-3p  : 0.972025
+hsa-miR-625-3p : 0.830937
+hsa-let-7f-5p  : 0.811874
+hsa-miR-30e-5p : 0.803535
+hsa-miR-30e-3p : 0.784162
+hsa-miR-20a-5p : 0.764331
+hsa-miR-203a   : 0.754727
+hsa-miR-30a-5p : 0.736680
+
+--- Top Methylation Features ---
+cg03100040     : 0.004473
+cg01946401     : 0.003935
+cg18894878     : 0.003738
+cg06564900     : 0.003613
+cg18397653     : 0.003599
+cg27327588     : 0.003478
+cg10978355     : 0.003477
+cg26317111     : 0.003474
+cg03704024     : 0.003439
+cg25023941     : 0.003433

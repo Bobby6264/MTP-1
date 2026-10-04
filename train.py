@@ -50,8 +50,8 @@ class MoXGATE(nn.Module):
         # Learnable gating weights (initialized equally)
         self.gate_weights = nn.Parameter(torch.tensor([0.333, 0.333, 0.333]))
 
-        # Cross-Attention Fusion
-        self.cross_attn = nn.MultiheadAttention(embed_dim=embed_dim, num_heads=8, batch_first=True)
+        # Cross-Attention Fusion (32 heads as per paper)
+        self.cross_attn = nn.MultiheadAttention(embed_dim=embed_dim, num_heads=32, batch_first=True)
         self.norm_fusion = nn.LayerNorm(embed_dim)
 
         # Classification Head
@@ -137,14 +137,8 @@ def main():
         num_classes=len(class_names)
     ).to(device)
 
-    # Class weighting for Focal Loss
-    # Normalized class weighting for Focal Loss
-    class_counts = np.bincount(y[train_idx])
-    weights = torch.tensor(1.0 / class_counts, dtype=torch.float32)
-    weights = weights / weights.sum() * len(class_counts) # Normalize to prevent shrinking loss
-    weights = weights.to(device)
-    
-    criterion = FocalLoss(alpha=weights, gamma=2.0)
+    # Class weighting for Focal Loss (Matched alpha=1 / None as per paper)
+    criterion = FocalLoss(alpha=None, gamma=2.0)
     optimizer = torch.optim.AdamW(model.parameters(), lr=1e-4, weight_decay=1e-2)
     
     best_val_acc = 0.0
@@ -160,6 +154,11 @@ def main():
             optimizer.zero_grad()
             out = model(g, m, me)
             loss = criterion(out, label)
+            
+            # Add λ₁‖w−1‖² regularizer (λ₁ = 0.01)
+            reg_loss = 0.01 * torch.sum((model.gate_weights - 1.0) ** 2)
+            loss = loss + reg_loss
+            
             loss.backward()
             optimizer.step()
 
@@ -183,14 +182,14 @@ def main():
 
         if val_acc > best_val_acc:
             best_val_acc = val_acc
-            torch.save(model.state_dict(), "moxgate_best_weights.pth")
+            torch.save(model.state_dict(), "pth files/moxgate_best_weights.pth")
 
         if epoch % 10 == 0 or epoch == 1:
             print(f"Epoch {epoch:03d}/{epochs} | Train Loss: {total_loss/total:.4f} | Train Acc: {train_acc*100:.2f}% | Val Acc: {val_acc*100:.2f}%")
 
     # Evaluation on Test Set
     print("\n--- Final Test Evaluation ---")
-    model.load_state_dict(torch.load("moxgate_best_weights.pth"))
+    model.load_state_dict(torch.load("pth files/moxgate_best_weights.pth"))
     model.eval()
     all_preds, all_targets = [], []
     with torch.no_grad():
